@@ -18,4 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('users', 'App\Http\Controllers\UserController');
+Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
+Route::apiResource('exercises', 'App\Http\Controllers\ExerciseController');
+
 
