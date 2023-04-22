@@ -6,11 +6,28 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function login() {
+    public function login(Request $request) {
+
+        $crendentials = $request->all(['email', 'password']);
 
         // autenticação de usuario (email e senha)
-        // retornar um token
 
+        $token = auth('api')->attempt($crendentials);
+
+        if ($token) {
+
+            return response()->json(['token' => $token]);
+
+        } else {
+
+            return response()->json(['error' => 'Usuario ou senha inválido'], 403);
+
+            // 401 = unauthorized
+            // 403 = forbidden -> proibido 
+        }
+
+        // retornar um token
+        dd($token);
         return 'login';
 
     }
