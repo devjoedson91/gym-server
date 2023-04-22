@@ -16,10 +16,12 @@ class CreateTrainningsTable extends Migration
         Schema::create('trainnings', function (Blueprint $table) {
             $table->id();
             $table->string('exercise_id');
+            $table->string('user_id');
             $table->integer('week_day');
             $table->integer('amount_series');
             $table->integer('amount_repeat');
             $table->integer('load');
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }
