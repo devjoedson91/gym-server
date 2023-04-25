@@ -15,7 +15,7 @@ class AuthController extends Controller
         $token = auth('api')->attempt($crendentials);
 
         if ($token) {
-
+            
             return response()->json(['token' => $token]);
 
         } else {
@@ -26,27 +26,26 @@ class AuthController extends Controller
             // 403 = forbidden -> proibido 
         }
 
-        // retornar um token
-        dd($token);
-        return 'login';
 
     }
 
     public function logout() {
 
-        return 'logout';
+        auth('api')->logout();
+        return response()->json(['msg' => 'Logout realizado com sucesso']);
 
     }
 
     public function refresh() {
 
-        return 'refresh';
+        $token = auth('api')->refresh(); // cliente encaminhe um jwt valido
+        return response()->json(['token' => $token]);
 
     }
 
     public function me() {
 
-        return 'me';
+        return response()->json(auth()->user());
 
     }
 }
