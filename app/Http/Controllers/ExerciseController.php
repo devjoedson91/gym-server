@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
-use App\Http\Requests\StoreExerciseRequest;
-use App\Http\Requests\UpdateExerciseRequest;
+use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
 {
@@ -31,12 +30,14 @@ class ExerciseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreExerciseRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreExerciseRequest $request)
+    public function store(Request $request)
     {
-        //
+        $exercise = Exercise::create($request->all());
+
+        return $exercise;
     }
 
     /**
@@ -64,11 +65,11 @@ class ExerciseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateExerciseRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Exercise  $exercise
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExerciseRequest $request, Exercise $exercise)
+    public function update(Request $request, Exercise $exercise)
     {
         //
     }

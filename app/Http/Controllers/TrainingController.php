@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Trainning;
+use App\Models\Training;
 use Illuminate\Http\Request;
 
-class TrainningController extends Controller
+class TrainingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class TrainningController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Trainning  $trainning
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function show(Trainning $trainning)
+    public function show(Training $training)
     {
         //
     }
@@ -52,10 +52,10 @@ class TrainningController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Trainning  $trainning
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trainning $trainning)
+    public function edit(Training $training)
     {
         //
     }
@@ -64,10 +64,10 @@ class TrainningController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Trainning  $trainning
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Trainning $trainning)
+    public function update(Request $request, Training $training)
     {
         //
     }
@@ -75,10 +75,10 @@ class TrainningController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Trainning  $trainning
+     * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trainning $trainning)
+    public function destroy(Training $training)
     {
         //
     }

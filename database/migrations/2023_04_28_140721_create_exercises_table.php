@@ -18,7 +18,7 @@ class CreateExercisesTable extends Migration
             $table->string('name');
             $table->string('cover');
             $table->string('video');
-            $table->string('category_id');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

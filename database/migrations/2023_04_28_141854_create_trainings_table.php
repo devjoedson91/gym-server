@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainningsTable extends Migration
+class CreateTrainingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTrainningsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trainnings', function (Blueprint $table) {
+        Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->string('exercise_id');
-            $table->string('user_id');
+            $table->integer('exercise_id');
+            $table->integer('user_id');
             $table->integer('week_day');
             $table->integer('amount_series');
             $table->integer('amount_repeat');
-            $table->integer('load');
+            $table->integer('load')->nullable()->default(NULL);
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateTrainningsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trainnings');
+        Schema::dropIfExists('trainings');
     }
 }
