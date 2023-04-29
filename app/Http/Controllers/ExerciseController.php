@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
 {
+
+    public function __construct(Exercise $exercise) { // esse constructor é executado quando a class for instanciado
+
+        $this->exercise = $exercise;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +42,7 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        $exercise = Exercise::create($request->all());
+        $exercise = $this->exercise->create($request->all());
 
         return $exercise;
     }

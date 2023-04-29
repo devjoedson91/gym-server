@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    /*
+    
+        $category é um objeto com tipagem Category
+    */
+
+
+    public function __construct(Category $category) { // esse constructor é executado quando a class for instanciado
+
+        $this->category = $category;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->category->all();
 
         return $categories;
     }
@@ -37,18 +50,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
+        $category = $this->category->create($request->all());
         return $category;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  Integer
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
+
         $category = $this->category->with('exercises')->find($id);
 
         if ($category === null) {
@@ -78,7 +92,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        echo 'cheguei ate aqui';
     }
 
     /**
