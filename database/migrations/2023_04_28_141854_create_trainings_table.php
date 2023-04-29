@@ -15,14 +15,17 @@ class CreateTrainingsTable extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->integer('exercise_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('exercise_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('week_day');
             $table->integer('amount_series');
             $table->integer('amount_repeat');
             $table->integer('load')->nullable()->default(NULL);
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
+
+            $table->foreign('exercise_id')->references('id')->on('exercises');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

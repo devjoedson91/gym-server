@@ -10,4 +10,12 @@ class Exercise extends Model
     use HasFactory;
 
     protected $fillable = ['name','cover','video','category_id'];
+
+    public function category() {
+
+        // um exercício pertence a uma categoria
+
+        return $this->belongsTo('App\Models\Category');
+
+    }
 }

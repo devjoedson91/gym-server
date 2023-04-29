@@ -11,4 +11,12 @@ class Category extends Model
     protected $fillable = ['name']; 
     
     // a categoria so precisa do nome, mas se tivesse mais dados seria incrementado no array ['name', 'lastName', ...]
+
+    public function exercises() {
+
+        // uma categoria possui muitos exercicios
+
+        return $this->hasMany('App\Models\Exercise');
+
+    }
 }
