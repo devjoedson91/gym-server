@@ -17,11 +17,11 @@ class CreateTrainingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('exercise_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('week_day');
             $table->integer('amount_series');
             $table->integer('amount_repeat');
             $table->integer('load')->nullable()->default(NULL);
             $table->boolean('is_completed')->default(false);
+            $table->integer('day_week');
             $table->timestamps();
 
             $table->foreign('exercise_id')->references('id')->on('exercises');

@@ -25,6 +25,7 @@ Route::prefix('v1')->middleware('jwt.auth')->group(function () {
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
     Route::apiResource('categories', 'App\Http\Controllers\CategoryController');
     Route::apiResource('exercises', 'App\Http\Controllers\ExerciseController');
+    Route::apiResource('trainings', 'App\Http\Controllers\TrainingController');
 
 });
 

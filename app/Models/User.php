@@ -62,5 +62,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function training() {
+
+        // um usuario possui muitos treinos
+
+        return $this->hasMany('App\Models\Training');
+
+    }
 }
 

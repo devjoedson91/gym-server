@@ -18,4 +18,15 @@ class Exercise extends Model
         return $this->belongsTo('App\Models\Category');
 
     }
+
+    public function training() {
+
+        // um exercicio pertence a um treino
+
+        return $this->hasMany('App\Models\Training');
+
+    }
+
+
+
 }

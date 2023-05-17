@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Category;
+use App\Models\Exercise;
 
 class UserController extends Controller
 {
+
+    public function __construct(User $user) { // esse constructor é executado quando a class for instanciado
+
+        $this->user = $user;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
     }
    
 
@@ -44,9 +54,17 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
-    {
-        //
+    public function show($id)
+    {   
+
+        $results = DB::select('SELECT c.name AS category, ex.name, tr.amount_series, tr.amount_repeat, tr.week_days, tr.is_completed FROM trainings tr 
+        INNER JOIN exercises ex INNER JOIN categories c ON ex.category_id = c.id ON tr.exercise_id = ex.id WHERE tr.user_id = ?', [$id]);
+
+        if ($results === null) {
+            return response()->json(['erro' => 'Recurso pesquisado não existe'], 404);
+        }
+
+        return response()->json($results, 200);
     }
 
     /**

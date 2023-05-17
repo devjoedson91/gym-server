@@ -56,7 +56,7 @@ class ExerciseController extends Controller
     public function show($id)
     {
 
-        $exercise = $this->exercise->with('category')->find($id);
+        $exercise = $this->exercise->with('category')->with('training')->find($id);
 
         if ($exercise === null) {
             return response()->json(['erro' => 'Recurso pesquisado não existe'], 404);

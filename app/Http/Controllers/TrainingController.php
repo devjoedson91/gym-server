@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
+
+    public function __construct(Training $training) { // esse constructor é executado quando a class for instanciado
+
+        $this->training = $training;
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class TrainingController extends Controller
      */
     public function index()
     {
-        //
+        return Training::all();
     }
 
     /**
@@ -35,7 +43,9 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $training = $this->training->create($request->all());
+
+        return $training;
     }
 
     /**
@@ -44,9 +54,21 @@ class TrainingController extends Controller
      * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function show(Training $training)
+    public function show($id)
     {
-        //
+        $results = Training::join('users', 'trainings.user_id', '=', 'users.id')
+            ->join('exercises', 'trainings.exercise_id', '=', 'exercises.id')
+            ->join('categories', 'exercises.category_id', '=', 'categories.id')
+            ->select('trainings.id as training_id', 'categories.name as category', 'exercises.name', 'trainings.day_week', 'trainings.amount_series', 'trainings.amount_repeat', 'trainings.is_completed')
+            ->where('trainings.user_id', '=', $id)
+            ->get();
+            // ->groupBy('category');
+
+        if ($results === null) {
+            return response()->json(['erro' => 'Recurso pesquisado não existe'], 404);
+        }
+
+        return response()->json($results, 200);
     }
 
     /**
@@ -67,9 +89,20 @@ class TrainingController extends Controller
      * @param  \App\Models\Training  $training
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Training $training)
+    public function update(Request $request, $id)
     {
-        //
+        // $training->update([
+        //     'is_completed' => true
+        // ]); // o metodo all lista todos os params do body da requisição
+
+        // return $training;
+
+        $isCompleted = $request->all()['is_completed'];
+
+        $contents = Training::where('id', '=', $id)
+            ->update(array("is_completed" => $isCompleted));
+
+        return $contents;        
     }
 
     /**
@@ -80,6 +113,9 @@ class TrainingController extends Controller
      */
     public function destroy(Training $training)
     {
-        //
+        // print_r($training->getAttributes());
+
+        $training->delete();
+        return ['msg' => 'O treino foi removido com sucesso'];
     }
 }
